@@ -928,8 +928,9 @@ func (a *App) addUserToChannel(user *model.User, channel *model.Channel, teamMem
 		SchemeUser:  !user.IsGuest(),
 	}
 
+	var aGroupIsConfiguredForAdminRole bool
 	if !user.IsGuest() {
-		aGroupIsConfiguredForAdminRole, err := a.GroupSyncablesWithAdminRole(user.Id, channel.Id, model.GroupSyncableTypeChannel)
+		aGroupIsConfiguredForAdminRole, err = a.GroupSyncablesWithAdminRole(user.Id, channel.Id, model.GroupSyncableTypeChannel)
 		if err != nil {
 			return nil, err
 		}
