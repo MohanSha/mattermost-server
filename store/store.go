@@ -620,8 +620,6 @@ type GroupStore interface {
 	ChannelMembersMinusGroupMembers(channelID string, groupIDs []string, page, perPage int) ([]*model.UserWithGroups, *model.AppError)
 	CountChannelMembersMinusGroupMembers(channelID string, groupIDs []string) (int64, *model.AppError)
 
-	// UserIsInAdminRoleGroup returns a list of IDs of groups that are configured to set members of the
-	// syncable (team or channel) as admins of that syncable.
 	UserIsInAdminRoleGroup(userID, teamID string, syncableType model.GroupSyncableType) ([]string, *model.AppError)
 
 	PermittedSyncableAdmins(syncableID string, syncableType model.GroupSyncableType) ([]string, *model.AppError)
