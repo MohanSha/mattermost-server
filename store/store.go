@@ -620,7 +620,7 @@ type GroupStore interface {
 	ChannelMembersMinusGroupMembers(channelID string, groupIDs []string, page, perPage int) ([]*model.UserWithGroups, *model.AppError)
 	CountChannelMembersMinusGroupMembers(channelID string, groupIDs []string) (int64, *model.AppError)
 
-	UserIsInAdminRoleGroup(userID, teamID string, syncableType model.GroupSyncableType) ([]string, *model.AppError)
+	AdminRoleGroupsForSyncableMember(userID, teamID string, syncableType model.GroupSyncableType) ([]string, *model.AppError)
 
 	PermittedSyncableAdmins(syncableID string, syncableType model.GroupSyncableType) ([]string, *model.AppError)
 

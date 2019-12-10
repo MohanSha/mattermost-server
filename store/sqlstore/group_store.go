@@ -1165,7 +1165,7 @@ func (s *SqlGroupStore) CountChannelMembersMinusGroupMembers(channelID string, g
 	return count, nil
 }
 
-func (s *SqlGroupStore) UserIsInAdminRoleGroup(userID, syncableID string, syncableType model.GroupSyncableType) ([]string, *model.AppError) {
+func (s *SqlGroupStore) AdminRoleGroupsForSyncableMember(userID, syncableID string, syncableType model.GroupSyncableType) ([]string, *model.AppError) {
 	var groupIds []string
 
 	sql := fmt.Sprintf(`
@@ -1188,7 +1188,7 @@ func (s *SqlGroupStore) UserIsInAdminRoleGroup(userID, syncableID string, syncab
 
 	_, err := s.GetReplica().Select(&groupIds, sql, map[string]interface{}{"UserId": userID, fmt.Sprintf("%sId", syncableType): syncableID})
 	if err != nil {
-		return nil, model.NewAppError("SqlGroupStore.UserIsInAdminRoleGroup", "store.select_error", nil, err.Error(), http.StatusInternalServerError)
+		return nil, model.NewAppError("SqlGroupStore AdminRoleGroupsForSyncableMember", "store.select_error", nil, err.Error(), http.StatusInternalServerError)
 	}
 
 	return groupIds, nil

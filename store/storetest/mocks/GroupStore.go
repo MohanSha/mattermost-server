@@ -15,6 +15,31 @@ type GroupStore struct {
 	mock.Mock
 }
 
+// AdminRoleGroupsForSyncableMember provides a mock function with given fields: userID, teamID, syncableType
+func (_m *GroupStore) AdminRoleGroupsForSyncableMember(userID string, teamID string, syncableType model.GroupSyncableType) ([]string, *model.AppError) {
+	ret := _m.Called(userID, teamID, syncableType)
+
+	var r0 []string
+	if rf, ok := ret.Get(0).(func(string, string, model.GroupSyncableType) []string); ok {
+		r0 = rf(userID, teamID, syncableType)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]string)
+		}
+	}
+
+	var r1 *model.AppError
+	if rf, ok := ret.Get(1).(func(string, string, model.GroupSyncableType) *model.AppError); ok {
+		r1 = rf(userID, teamID, syncableType)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*model.AppError)
+		}
+	}
+
+	return r0, r1
+}
+
 // ChannelMembersMinusGroupMembers provides a mock function with given fields: channelID, groupIDs, page, perPage
 func (_m *GroupStore) ChannelMembersMinusGroupMembers(channelID string, groupIDs []string, page int, perPage int) ([]*model.UserWithGroups, *model.AppError) {
 	ret := _m.Called(channelID, groupIDs, page, perPage)
@@ -853,31 +878,6 @@ func (_m *GroupStore) UpsertMember(groupID string, userID string) (*model.GroupM
 	var r1 *model.AppError
 	if rf, ok := ret.Get(1).(func(string, string) *model.AppError); ok {
 		r1 = rf(groupID, userID)
-	} else {
-		if ret.Get(1) != nil {
-			r1 = ret.Get(1).(*model.AppError)
-		}
-	}
-
-	return r0, r1
-}
-
-// UserIsInAdminRoleGroup provides a mock function with given fields: userID, teamID, syncableType
-func (_m *GroupStore) UserIsInAdminRoleGroup(userID string, teamID string, syncableType model.GroupSyncableType) ([]string, *model.AppError) {
-	ret := _m.Called(userID, teamID, syncableType)
-
-	var r0 []string
-	if rf, ok := ret.Get(0).(func(string, string, model.GroupSyncableType) []string); ok {
-		r0 = rf(userID, teamID, syncableType)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]string)
-		}
-	}
-
-	var r1 *model.AppError
-	if rf, ok := ret.Get(1).(func(string, string, model.GroupSyncableType) *model.AppError); ok {
-		r1 = rf(userID, teamID, syncableType)
 	} else {
 		if ret.Get(1) != nil {
 			r1 = ret.Get(1).(*model.AppError)
