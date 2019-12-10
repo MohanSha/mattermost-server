@@ -42,9 +42,8 @@ type Group struct {
 	HasSyncables bool        `db:"-" json:"has_syncables"`
 	MemberCount  *int        `db:"-" json:"member_count,omitempty"`
 
-	// SchemeAdmin is only valid if the Group has been retrieved from the perspective of an associated Syncable
-	// because actually it's an attribute of the GroupSyncable join model. For convenience it can be set on the
-	// Group when doing a "get groups by channel" or "get groups by team" retrieval.
+	// SchemeAdmin is significant only if the group is retrieved from the perspective of an associated syncable.
+	// Ex: "get groups by channel" or "get groups by team".
 	SchemeAdmin *bool `db:"-" json:"scheme_admin"`
 }
 

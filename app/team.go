@@ -544,11 +544,11 @@ func (a *App) joinUserToTeam(team *model.Team, user *model.User) (*model.TeamMem
 	}
 
 	if !user.IsGuest() {
-		aGroupIsConfiguredForAdminRole, err := a.GroupSyncablesWithAdminRole(user.Id, team.Id, model.GroupSyncableTypeTeam)
+		userShouldBeAdmin, err := a.UserIsInAdminRoleGroup(user.Id, team.Id, model.GroupSyncableTypeTeam)
 		if err != nil {
 			return nil, false, err
 		}
-		tm.SchemeAdmin = aGroupIsConfiguredForAdminRole
+		tm.SchemeAdmin = userShouldBeAdmin
 	}
 
 	if team.Email == user.Email {
