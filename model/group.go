@@ -44,7 +44,7 @@ type Group struct {
 
 	// SchemeAdmin is significant only if the group is retrieved from the perspective of an associated syncable.
 	// Ex: "get groups by channel" or "get groups by team".
-	SchemeAdmin *bool `db:"-" json:"scheme_admin"`
+	SchemeAdmin *bool `db:"-" json:"scheme_admin,omitempty"`
 }
 
 type GroupPatch struct {
